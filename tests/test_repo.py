@@ -94,6 +94,14 @@ class RepoTests(unittest.TestCase):
             self.assertIn("description", fm)
             self.assertEqual({t.strip() for t in fm["tools"].split(",")}, {"Read", "Grep", "Glob", "Bash", "Edit", "Write"})
 
+    def test_version_is_consistent(self):
+        with open(os.path.join(ROOT, ".claude-plugin", "plugin.json"), encoding="utf-8") as fh:
+            version = json.load(fh)["version"]
+        with open(os.path.join(ROOT, "CHANGELOG.md"), encoding="utf-8") as fh:
+            self.assertIn(f"## [{version}]", fh.read(), "CHANGELOG.md needs an entry for the plugin.json version")
+        with open(os.path.join(ROOT, "CITATION.cff"), encoding="utf-8") as fh:
+            self.assertRegex(fh.read(), rf"(?m)^version: {re.escape(version)}$")
+
     def test_config_templates_are_json(self):
         d = os.path.join(ROOT, "skills", "oidf-conformance", "references", "config-templates")
         for fn in os.listdir(d):

@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this kit in a report or paper, please cite it as below."
+title: "OIDF Conformance Kit"
+abstract: "A Claude Code plugin for running the OpenID Foundation conformance suite against OpenID4VCI issuers and OpenID4VP verifiers (HAIP, FAPI 2.0)."
+type: software
+authors:
+  - name: "Tamga Network"
+    website: "https://tamga.network"
+repository-code: "https://github.com/tamga-network/oidf-conformance-kit"
+url: "https://github.com/tamga-network/oidf-conformance-kit"
+license: Apache-2.0
+version: 0.1.0
+date-released: 2026-10-27
+keywords:
+  - openid
+  - oid4vci
+  - oid4vp
+  - haip
+  - fapi2
+  - conformance

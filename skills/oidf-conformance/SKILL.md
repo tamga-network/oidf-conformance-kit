@@ -140,7 +140,9 @@ FAILED remains and every WARNING/REVIEW has a written reason.
 ### 10. Publish
 
 Plan page → **Publish** → *summary* (results only) unless you deliberately want to publish everything (*everything*
-also exposes detailed logs and configuration). Publish a short results page next to it: plan, variants, suite version
+also exposes detailed logs and configuration). **Before publishing, rotate every key and secret in the plan
+configuration** (revoke the test keys in your test environment and replace them) — treat anything that was ever in a
+suite configuration as public from then on. Publish a short results page next to it: plan, variants, suite version
 (`testInfo.version` in the logs) and date, per-module outcome, and a "deliberate deviations and suite limitations"
 section. Formal certification is a separate step with the OpenID Foundation.
 

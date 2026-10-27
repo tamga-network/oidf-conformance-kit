@@ -85,13 +85,32 @@ implement.
   - `format: "vc+sd-jwt"`: Final uses `dc+sd-jwt` (`VCICheckForOldSdJwtFormatInCredentialConfigurations`).
   - Locale validity: `VCIValidateDisplayLocales` (FAILURE) requires well-formed, registered BCP 47 tags and only one
     display object per language identifier (VCI §12.2.4); `VCIWarnOnNonCanonicalDisplayLocales` (WARNING) flags casing
-    such as `DE` or `en-us`.
+    such as `DE` or `en-us`. See [locale normalization](#cf-locale-normalization).
 - **Then allow-list real extensions** (an ecosystem-defined member such as one from an ETSI profile or an EUDI rulebook):
   add the member *names* to `vci.allow_unexpected_credential_issuer_metadata_fields` in the plan configuration. The
   name matches at any depth. The configuration of an existing plan cannot be edited, so create a new plan.
   For extra members in the **authorization server** metadata, the FAPI discovery module uses
   `server.allow_unexpected_metadata_fields` (`CheckForUnexpectedParametersInServerMetadata`).
 - **Do not** remove a member the ecosystem requires just to silence the warning. Document it.
+
+<a id="cf-locale-normalization"></a>
+### Locale normalization
+
+Normalize every display `locale` once, where the issuer metadata is built, from a single source of truth:
+
+- **Canonical case** (RFC 5646 §2.1.1): language lower case, script title case, region upper case — `de`, `en-US`,
+  `sr-Latn-RS`, `zh-Hant-TW`. Anything else is a `VCIWarnOnNonCanonicalDisplayLocales` WARNING.
+- **Compare after normalizing.** Tags are case-insensitive, so `en-us` and `en-US` are the *same* language identifier
+  and two display objects carrying them are a duplicate (`VCIValidateDisplayLocales` FAILURE). `en` and `en-US` are
+  different identifiers and may coexist.
+- **Registered subtags only.** A country code is not a language code: Danish is `da` (not `dk`), Ukrainian `uk` (not
+  `ua`), Greek `el` (not `gr`), Swedish `sv` (not `se`). Private-use or made-up primary subtags fail validation.
+- **Scope.** Apply this to the OpenID4VCI issuer metadata (`credential_metadata.display[].locale`,
+  `credential_metadata.claims[].display[].locale`, top-level `display[].locale`). Leave SD-JWT VC type metadata (`lang`)
+  and credential contents alone; validate them with the same rules but don't rename the member.
+
+A small helper (split on `-`, lower-case the first subtag, title-case 4-letter subtags, upper-case 2-letter region
+subtags after the first) plus a unit test that fails on duplicates after normalization covers both checks.
 
 <a id="cf-schema-cascade"></a>
 ### Cascading `unevaluatedProperties` warning (suite limitation)

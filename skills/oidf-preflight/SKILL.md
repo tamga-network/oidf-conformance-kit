@@ -30,10 +30,10 @@ Search tip: patterns are regexes for Grep; widen them with the project's own ide
 | A1 | Client attestation alg lists | `attest_jwt_client_auth`, `client_attestation_signing_alg_values_supported`, `client_attestation_pop_signing_alg_values_supported` | Both arrays present, non-empty, wherever `attest_jwt_client_auth` is advertised |
 | A2 | AS metadata basics | `pushed_authorization_request_endpoint`, `require_pushed_authorization_requests`, `code_challenge_methods_supported`, `dpop_signing_alg_values_supported`, `authorization_response_iss_parameter_supported` | PAR required, `["S256"]` only, `["ES256"]` (or what you support), iss parameter `true` |
 | A3 | Display shape | `display` near `credential_configurations_supported`; `credential_metadata` | `display` and `claims` inside `credential_metadata` (VCI §12.2.4), not on the configuration |
-| A4 | Locale vs lang | `"lang"` / `lang:` in issuer-metadata code | `locale` in OpenID4VCI metadata; `lang` only in SD-JWT VC type metadata; tags valid BCP 47, canonical case, one object per language |
+| A4 | Locale vs lang | `"lang"` / `lang:` in issuer-metadata code | `locale` in OpenID4VCI metadata; `lang` only in SD-JWT VC type metadata; tags valid BCP 47, canonical case, one object per language after [normalization](../oidf-conformance/references/common-failures.md#cf-locale-normalization) |
 | A5 | Format identifiers | `vc\+sd-jwt` | `dc+sd-jwt` everywhere |
 | A6 | Nonce endpoint | `nonce_endpoint` | Advertised and implemented (HAIP-4.1-5) |
-| A7 | Extensions in metadata | non-standard members in issuer/AS metadata builders | Each extension listed with its source spec, ready for the allow-list |
+| A7 | Extensions in metadata | non-standard members in issuer/AS metadata builders | Each extension listed with its source spec, ready for the allow-list; an extension inside `credential_metadata` will also trigger the [schema cascade](../oidf-conformance/references/common-failures.md#cf-schema-cascade) WARNING — note it as an expected suite limitation |
 | A8 | Signed metadata | `application/jwt`, `openidvci-issuer-metadata+jwt` | `Accept: application/jwt` returns a signed JWT with the same content |
 | A9 | Scope per configuration | `scope` in configurations | Each configuration the suite uses has a `scope` valid per RFC 6749 §3.3 |
 
@@ -91,7 +91,7 @@ Search tip: patterns are regexes for Grep; widen them with the project's own ide
 | E6 | Unknown parameters | strict request schemas | Unknown parameters ignored (the suite adds random ones) |
 | E7 | Batch | `proofs`, batch size | One credential per proof, each bound to its key, distinct keys enforced |
 | E8 | Time claims | `iat`, `exp`, `nbf`, mdoc `validityInfo` | Rounded (hour/day) or randomized, consistently for exp; not before the signer's `notBefore` |
-| E9 | Status indices | status list allocation | Random, unique per credential, shared lists |
+| E9 | Status indices | status list allocation | Random (no arithmetic progression across a batch), unique `uri`+`idx` per credential, lists shared across holders |
 | E10 | Notification | issuance state | Issuance doesn't depend on the notification call |
 
 ## F. Transport
@@ -111,7 +111,7 @@ Search tip: patterns are regexes for Grep; widen them with the project's own ide
 | G2 | No invented parameters | request builder | No `purpose` or other non-VP members; purpose comes from `verifier_info`/registration data |
 | G3 | `x509_hash` client id | client id computation | `x509_hash:` + base64url(SHA-256(leaf DER)) |
 | G4 | Request URI serving | `request_uri` handler | `application/oauth-authz-req+jwt`; fetchable twice; optional POST with `wallet_nonce` |
-| G5 | Encryption key | `client_metadata.jwks` generation | Fresh ephemeral ECDH-ES key per request, with `kid`; `encrypted_response_enc_values_supported` |
+| G5 | Encryption key | `client_metadata.jwks` generation | Fresh ephemeral ECDH-ES key per request, with `kid` (`VP1FinalCheckEncryptionKeyNotReused` FAILURE under HAIP otherwise); `encrypted_response_enc_values_supported` |
 | G6 | `vp_formats_supported` | client metadata | Only formats the DCQL query uses |
 | G7 | DCQL | policy definitions | One credential per request for the test policy; no non-disclosable claims requested; `vct_values` exact |
 | G8 | Response endpoint | `response_uri` handler | Invalid presentation → `400` (no screenshot needed); success → `200 {"redirect_uri": …}` only; transaction not consumed by a failed holder binding |

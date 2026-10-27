@@ -40,6 +40,16 @@ requests.
    python ../scripts/oidf-log-summary.py sample-logs --format json -o sample-summary.json
    ```
 
+6. Add a line to [CHANGELOG.md](CHANGELOG.md) under *Unreleased*.
+
+Participation is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). Report security problems privately as described
+in [SECURITY.md](SECURITY.md), not as issues.
+
+## Releasing (maintainers)
+
+Bump `version` in `.claude-plugin/plugin.json` and `CITATION.cff`, move *Unreleased* to a dated section in
+`CHANGELOG.md`, then tag `vX.Y.Z` and create a GitHub release from the changelog section.
+
 ## License
 
 By contributing you agree that your contributions are licensed under the Apache License 2.0 (see [LICENSE](LICENSE)).

@@ -1,0 +1,50 @@
+name: Bug report
+description: Something in the kit is wrong — a skill step, a reference, the summarizer or the fixer agent.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Never paste raw conformance logs or filled-in suite configurations here** — they contain private keys and
+        account data. Use `python scripts/oidf-log-summary.py <logs> --redact` and paste only the relevant lines.
+        Security problems (for example the summarizer leaking a secret) go to a private advisory, see SECURITY.md.
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - oidf-conformance skill
+        - oidf-preflight skill
+        - oidf-fixer agent
+        - references (plan / module / common failures)
+        - config templates / PKI recipe
+        - log summarizer script
+        - plugin install / manifests
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, what you got.
+    validations:
+      required: true
+  - type: textarea
+    id: excerpt
+    attributes:
+      label: Redacted summarizer output (if relevant)
+      render: text
+  - type: input
+    id: kit-version
+    attributes:
+      label: Kit version
+      placeholder: "0.1.0"
+  - type: input
+    id: suite-version
+    attributes:
+      label: Suite version (`testInfo.version` in the log) or commit
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      placeholder: "Claude Code x.y, Python 3.x, OS"

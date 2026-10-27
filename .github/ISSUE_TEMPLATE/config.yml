@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Discussions
+    url: https://github.com/tamga-network/oidf-conformance-kit/discussions
+    about: Ideas, experiences with the suite, and general questions.
+  - name: Report a security vulnerability
+    url: https://github.com/tamga-network/oidf-conformance-kit/security/advisories/new
+    about: Please report security issues privately, not as a public issue.
+  - name: Conformance suite issues (upstream)
+    url: https://gitlab.com/openid/conformance-suite/-/issues
+    about: Bugs in the conformance suite itself belong to the OpenID Foundation's tracker.

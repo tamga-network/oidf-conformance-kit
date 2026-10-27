@@ -1,0 +1,51 @@
+name: New suite check / module mapping
+description: The conformance suite added, renamed or changed a module or condition class, or a finding has no mapping yet.
+labels: ["suite-update"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks — the suite changes often and this is the most useful kind of report.
+        Don't paste raw logs or configurations; the condition name, result and message are enough.
+  - type: dropdown
+    id: plan
+    attributes:
+      label: Plan
+      options:
+        - oid4vci-1_0-issuer-haip-test-plan (VCI modules)
+        - oid4vci-1_0-issuer-haip-test-plan (FAPI 2.0 modules)
+        - oid4vp-1final-verifier-haip-test-plan
+        - other
+    validations:
+      required: true
+  - type: input
+    id: module
+    attributes:
+      label: Module name
+      placeholder: "oid4vci-1_0-issuer-batch-issuance"
+  - type: input
+    id: condition
+    attributes:
+      label: Condition class (`src` in the log)
+      placeholder: "VCIEnsureBatchStatusListIndicesAreUnpredictable"
+    validations:
+      required: true
+  - type: dropdown
+    id: result
+    attributes:
+      label: Result it produced
+      options: [FAILURE, WARNING, REVIEW, INFO, SKIPPED]
+  - type: textarea
+    id: message
+    attributes:
+      label: Message and requirement codes the suite printed
+      render: text
+  - type: textarea
+    id: cause-fix
+    attributes:
+      label: Cause and fix (if known), with spec section
+      description: Every fix must cite the spec or profile section that requires it. If only the suite requires it, say so — it is a suite limitation.
+  - type: input
+    id: suite-commit
+    attributes:
+      label: Suite version or commit you checked
