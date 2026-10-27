@@ -1,0 +1,25 @@
+{
+  "name": "oidf-conformance-kit",
+  "displayName": "OIDF Conformance Kit",
+  "version": "0.1.0",
+  "description": "Run the OpenID Foundation conformance suite against an OpenID4VCI issuer or OpenID4VP verifier (HAIP, FAPI 2.0): plan and variant choice, suite configuration, per-module references, a pre-flight code checklist, a log summarizer and a fixer agent that fixes for the spec, not for suite quirks.",
+  "author": {
+    "name": "Tamga Network",
+    "url": "https://github.com/tamga-network"
+  },
+  "homepage": "https://github.com/tamga-network/oidf-conformance-kit",
+  "repository": "https://github.com/tamga-network/oidf-conformance-kit",
+  "license": "Apache-2.0",
+  "keywords": [
+    "openid",
+    "oid4vci",
+    "oid4vp",
+    "haip",
+    "fapi2",
+    "conformance",
+    "eudi",
+    "sd-jwt-vc",
+    "dpop",
+    "par"
+  ]
+}

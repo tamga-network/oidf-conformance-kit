@@ -1,0 +1,127 @@
+{
+  "exportedAt": "2026-10-27T10:00:00Z",
+  "exportedFrom": "https://demo.certification.openid.net",
+  "exportedBy": {
+    "sub": "000000000000000000000",
+    "iss": "https://accounts.example.org"
+  },
+  "exportedVersion": "5.3.3",
+  "testInfo": {
+    "_id": "synthMeta00001",
+    "testId": "synthMeta00001",
+    "testName": "oid4vci-1_0-issuer-metadata-test",
+    "variant": {
+      "client_auth_type": "client_attestation",
+      "credential_format": "sd_jwt_vc",
+      "fapi_profile": "vci_haip"
+    },
+    "started": "2026-10-27T09:00:00Z",
+    "config": {
+      "alias": "example-issuer",
+      "vci": {
+        "credential_issuer_url": "https://issuer.example.com"
+      },
+      "client_attestation": {
+        "attester_jwks": {
+          "keys": [
+            {
+              "kty": "EC",
+              "crv": "P-256",
+              "d": "SYNTHETIC-PRIVATE-KEY-MUST-NOT-APPEAR",
+              "x": "AAAA",
+              "y": "BBBB"
+            }
+          ]
+        }
+      }
+    },
+    "description": "synthetic example",
+    "alias": "example-issuer",
+    "owner": {
+      "sub": "000000000000000000000",
+      "iss": "https://accounts.example.org"
+    },
+    "planId": "SYNTHPLAN0001",
+    "status": "FINISHED",
+    "version": "5.3.3",
+    "summary": "synthetic",
+    "publish": null,
+    "result": "FAILED"
+  },
+  "results": [
+    {
+      "src": "oid4vci-1_0-issuer-metadata-test",
+      "msg": "Setup Done",
+      "_id": "synthMeta00001-0",
+      "testId": "synthMeta00001",
+      "testOwner": {
+        "sub": "000000000000000000000",
+        "iss": "https://accounts.example.org"
+      },
+      "time": 1792600000000
+    },
+    {
+      "src": "VCICheckRequiredMetadataFields",
+      "result": "SUCCESS",
+      "msg": "All required fields are present",
+      "requirements": [
+        "OID4VCI-1FINAL-12.2.3"
+      ],
+      "_id": "synthMeta00001-1",
+      "testId": "synthMeta00001",
+      "testOwner": {
+        "sub": "000000000000000000000",
+        "iss": "https://accounts.example.org"
+      },
+      "time": 1792600000001
+    },
+    {
+      "src": "CheckForUnexpectedParametersInCredentialIssuerMetadata",
+      "result": "WARNING",
+      "requirements": [
+        "OID4VCI-1FINAL-12.2.3"
+      ],
+      "msg": "Unknown properties were found in the OID4VCI Credential Issuer metadata.",
+      "input": {
+        "credential_issuer": "https://issuer.example.com",
+        "secret_looking": "SECRET-INPUT-MUST-NOT-APPEAR"
+      },
+      "unknown_properties": [
+        {
+          "property": "lang",
+          "path": "$.credential_configurations_supported.example_pid.credential_metadata.display[0].lang"
+        },
+        {
+          "property": "display",
+          "path": "$.credential_configurations_supported.example_pid.display"
+        }
+      ],
+      "_id": "synthMeta00001-2",
+      "testId": "synthMeta00001",
+      "testOwner": {
+        "sub": "000000000000000000000",
+        "iss": "https://accounts.example.org"
+      },
+      "time": 1792600000002
+    },
+    {
+      "src": "CheckDiscEndpointClientAttestationSigningAlgValuesSupported",
+      "result": "FAILURE",
+      "requirements": [
+        "OAuth2-ATCA07-10.1"
+      ],
+      "msg": "attest_jwt_client_auth is supported but required fields are missing",
+      "missing_fields": [
+        "client_attestation_signing_alg_values_supported",
+        "client_attestation_pop_signing_alg_values_supported"
+      ],
+      "_id": "synthMeta00001-3",
+      "testId": "synthMeta00001",
+      "testOwner": {
+        "sub": "000000000000000000000",
+        "iss": "https://accounts.example.org"
+      },
+      "time": 1792600000003
+    }
+  ]
+}

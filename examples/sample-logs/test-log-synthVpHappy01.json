@@ -1,0 +1,100 @@
+{
+  "exportedAt": "2026-10-27T10:00:00Z",
+  "exportedFrom": "https://demo.certification.openid.net",
+  "exportedBy": {
+    "sub": "000000000000000000000",
+    "iss": "https://accounts.example.org"
+  },
+  "exportedVersion": "5.3.3",
+  "testInfo": {
+    "_id": "synthVpHappy01",
+    "testId": "synthVpHappy01",
+    "testName": "oid4vp-1final-verifier-happy-flow",
+    "variant": {
+      "client_id_prefix": "x509_hash",
+      "credential_format": "sd_jwt_vc",
+      "request_method": "request_uri_signed",
+      "response_mode": "direct_post.jwt",
+      "vp_profile": "haip"
+    },
+    "started": "2026-10-27T10:00:00Z",
+    "config": {
+      "alias": "example-verifier",
+      "credential": {
+        "signing_jwk": {
+          "kty": "EC",
+          "d": "SYNTHETIC-PRIVATE-KEY-MUST-NOT-APPEAR"
+        }
+      }
+    },
+    "description": "synthetic example",
+    "alias": "example-verifier",
+    "owner": {
+      "sub": "000000000000000000000",
+      "iss": "https://accounts.example.org"
+    },
+    "planId": "SYNTHPLAN0001",
+    "status": "FINISHED",
+    "version": "5.3.3",
+    "summary": "synthetic",
+    "publish": null,
+    "result": "REVIEW"
+  },
+  "results": [
+    {
+      "src": "CheckForUnexpectedParametersInVpAuthorizationRequest",
+      "result": "WARNING",
+      "msg": "Unknown parameters were found in the authorization request.",
+      "unknown_params": [
+        "purpose"
+      ],
+      "parameters": [
+        "client_id",
+        "purpose",
+        "nonce"
+      ],
+      "_id": "synthVpHappy01-0",
+      "testId": "synthVpHappy01",
+      "testOwner": {
+        "sub": "000000000000000000000",
+        "iss": "https://accounts.example.org"
+      },
+      "time": 1792600000000
+    },
+    {
+      "src": "ValidateDirectPostResponse",
+      "result": "WARNING",
+      "requirements": [
+        "OID4VP-1FINAL-8.2"
+      ],
+      "msg": "Direct post response object contains unexpected keys",
+      "response": {
+        "redirect_uri": "https://verifier.example.com/result?session=SECRET-SESSION-VALUE",
+        "extra_url": "https://verifier.example.com/x?k=SECRET"
+      },
+      "_id": "synthVpHappy01-1",
+      "testId": "synthVpHappy01",
+      "testOwner": {
+        "sub": "000000000000000000000",
+        "iss": "https://accounts.example.org"
+      },
+      "time": 1792600000001
+    },
+    {
+      "src": "ExpectVerifierSuccessfulVerificationPage",
+      "result": "REVIEW",
+      "requirements": [
+        "OID4VP-1FINAL-8.2"
+      ],
+      "msg": "Upload a screenshot showing that the verifier successfully verified the presented credential.",
+      "img": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==",
+      "_id": "synthVpHappy01-2",
+      "testId": "synthVpHappy01",
+      "testOwner": {
+        "sub": "000000000000000000000",
+        "iss": "https://accounts.example.org"
+      },
+      "time": 1792600000002
+    }
+  ]
+}

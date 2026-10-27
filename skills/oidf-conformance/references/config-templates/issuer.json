@@ -1,0 +1,55 @@
+{
+  "alias": "REPLACE-my-issuer-selftest",
+  "description": "OID4VCI 1.0 Final + HAIP issuer self-test (test environment)",
+  "vci": {
+    "credential_issuer_url": "https://issuer.example.com",
+    "credential_configuration_id": "REPLACE-credential-configuration-id",
+    "allow_unexpected_credential_issuer_metadata_fields": []
+  },
+  "server": {
+    "allow_unexpected_metadata_fields": []
+  },
+  "client": {
+    "client_id": "REPLACE-selftest-client-1"
+  },
+  "client2": {
+    "client_id": "REPLACE-selftest-client-2"
+  },
+  "client_attestation": {
+    "issuer": "https://wallet-provider.example.com/selftest",
+    "attester_jwks": {
+      "keys": [
+        {
+          "kty": "EC",
+          "crv": "P-256",
+          "alg": "ES256",
+          "use": "sig",
+          "kid": "selftest-attester",
+          "x": "REPLACE-base64url-x",
+          "y": "REPLACE-base64url-y",
+          "d": "REPLACE-base64url-PRIVATE-d (never commit the real value)",
+          "x5c": ["REPLACE-base64-DER-attester-leaf (no root)"]
+        }
+      ]
+    },
+    "key_attestation_jwks": {
+      "keys": [
+        {
+          "kty": "EC",
+          "crv": "P-256",
+          "alg": "ES256",
+          "use": "sig",
+          "kid": "selftest-key-attestation",
+          "x": "REPLACE-base64url-x",
+          "y": "REPLACE-base64url-y",
+          "d": "REPLACE-base64url-PRIVATE-d (never commit the real value)",
+          "x5c": ["REPLACE-base64-DER-key-attestation-leaf (no root)"]
+        }
+      ]
+    }
+  },
+  "credential": {
+    "trust_anchor_pem": "-----BEGIN CERTIFICATE-----\nREPLACE-root-that-signs-your-credential-signing-certificates\n-----END CERTIFICATE-----\n",
+    "status_list_trust_anchor_pem": "-----BEGIN CERTIFICATE-----\nREPLACE-root-that-signs-your-status-list-signing-certificates\n-----END CERTIFICATE-----\n"
+  }
+}

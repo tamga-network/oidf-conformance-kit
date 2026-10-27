@@ -1,0 +1,17 @@
+{
+  "name": "oidf-conformance-kit",
+  "description": "Marketplace for the OIDF Conformance Kit plugin (OpenID4VCI / OpenID4VP / HAIP / FAPI 2.0 conformance testing).",
+  "owner": {
+    "name": "Tamga Network",
+    "url": "https://github.com/tamga-network"
+  },
+  "plugins": [
+    {
+      "name": "oidf-conformance-kit",
+      "source": "./",
+      "description": "Workflow, per-module references, pre-flight checklist, log summarizer and fixer agent for the OpenID Foundation conformance suite (issuer and verifier HAIP plans).",
+      "category": "development",
+      "keywords": ["openid", "oid4vci", "oid4vp", "haip", "fapi2", "conformance"]
+    }
+  ]
+}

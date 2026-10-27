@@ -1,0 +1,20 @@
+{
+  "alias": "REPLACE-my-verifier-selftest",
+  "description": "OID4VP 1.0 Final + HAIP verifier self-test (test environment)",
+  "client": {
+    "request_object_trust_anchor_pem": "-----BEGIN CERTIFICATE-----\nREPLACE-root-of-your-request-object-signing-chain\n-----END CERTIFICATE-----\n"
+  },
+  "credential": {
+    "signing_jwk": {
+      "kty": "EC",
+      "crv": "P-256",
+      "alg": "ES256",
+      "use": "sig",
+      "kid": "selftest-pid-issuer",
+      "x": "REPLACE-base64url-x",
+      "y": "REPLACE-base64url-y",
+      "d": "REPLACE-base64url-PRIVATE-d (never commit the real value)",
+      "x5c": ["REPLACE-base64-DER-mock-PID-issuer-leaf (no root)"]
+    }
+  }
+}

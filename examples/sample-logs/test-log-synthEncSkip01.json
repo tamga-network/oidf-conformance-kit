@@ -1,0 +1,70 @@
+{
+  "exportedAt": "2026-10-27T10:00:00Z",
+  "exportedFrom": "https://demo.certification.openid.net",
+  "exportedBy": {
+    "sub": "000000000000000000000",
+    "iss": "https://accounts.example.org"
+  },
+  "exportedVersion": "5.3.3",
+  "testInfo": {
+    "_id": "synthEncSkip01",
+    "testId": "synthEncSkip01",
+    "testName": "oid4vci-1_0-issuer-fail-unsupported-encryption-algorithm",
+    "variant": {
+      "client_auth_type": "client_attestation",
+      "credential_format": "sd_jwt_vc",
+      "fapi_profile": "vci_haip",
+      "vci_authorization_code_flow_variant": "wallet_initiated",
+      "sender_constrain": "dpop",
+      "fapi_request_method": "unsigned",
+      "openid": "plain_oauth",
+      "vci_credential_encryption": "encrypted"
+    },
+    "started": "2026-10-27T09:30:00Z",
+    "config": {
+      "alias": "example-issuer",
+      "vci": {
+        "credential_issuer_url": "https://issuer.example.com"
+      },
+      "client_attestation": {
+        "attester_jwks": {
+          "keys": [
+            {
+              "kty": "EC",
+              "crv": "P-256",
+              "d": "SYNTHETIC-PRIVATE-KEY-MUST-NOT-APPEAR",
+              "x": "AAAA",
+              "y": "BBBB"
+            }
+          ]
+        }
+      }
+    },
+    "description": "synthetic example",
+    "alias": "example-issuer",
+    "owner": {
+      "sub": "000000000000000000000",
+      "iss": "https://accounts.example.org"
+    },
+    "planId": "SYNTHPLAN0001",
+    "status": "FINISHED",
+    "version": "5.3.3",
+    "summary": "synthetic",
+    "publish": null,
+    "result": "SKIPPED"
+  },
+  "results": [
+    {
+      "src": "oid4vci-1_0-issuer-fail-unsupported-encryption-algorithm",
+      "result": "SKIPPED",
+      "msg": "The test was skipped: Credential encryption is not supported by the credential issuer - neither credential_response_encryption nor credential_request_encryption are present in the credential issuer metadata.",
+      "_id": "synthEncSkip01-0",
+      "testId": "synthEncSkip01",
+      "testOwner": {
+        "sub": "000000000000000000000",
+        "iss": "https://accounts.example.org"
+      },
+      "time": 1792600000000
+    }
+  ]
+}

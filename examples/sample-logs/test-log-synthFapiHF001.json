@@ -1,0 +1,131 @@
+{
+  "exportedAt": "2026-10-27T10:00:00Z",
+  "exportedFrom": "https://demo.certification.openid.net",
+  "exportedBy": {
+    "sub": "000000000000000000000",
+    "iss": "https://accounts.example.org"
+  },
+  "exportedVersion": "5.3.3",
+  "testInfo": {
+    "_id": "synthFapiHF001",
+    "testId": "synthFapiHF001",
+    "testName": "fapi2-security-profile-final-happy-flow",
+    "variant": {
+      "client_auth_type": "client_attestation",
+      "credential_format": "sd_jwt_vc",
+      "fapi_profile": "vci_haip",
+      "vci_authorization_code_flow_variant": "wallet_initiated",
+      "sender_constrain": "dpop",
+      "fapi_request_method": "unsigned",
+      "openid": "plain_oauth"
+    },
+    "started": "2026-10-27T09:10:00Z",
+    "config": {
+      "alias": "example-issuer",
+      "vci": {
+        "credential_issuer_url": "https://issuer.example.com"
+      },
+      "client_attestation": {
+        "attester_jwks": {
+          "keys": [
+            {
+              "kty": "EC",
+              "crv": "P-256",
+              "d": "SYNTHETIC-PRIVATE-KEY-MUST-NOT-APPEAR",
+              "x": "AAAA",
+              "y": "BBBB"
+            }
+          ]
+        }
+      }
+    },
+    "description": "synthetic example",
+    "alias": "example-issuer",
+    "owner": {
+      "sub": "000000000000000000000",
+      "iss": "https://accounts.example.org"
+    },
+    "planId": "SYNTHPLAN0001",
+    "status": "INTERRUPTED",
+    "version": "5.3.3",
+    "summary": "synthetic",
+    "publish": null,
+    "result": "FAILED"
+  },
+  "results": [
+    {
+      "src": "DisallowTLS10",
+      "result": "SUCCESS",
+      "msg": "Server refused TLS 1.0",
+      "_id": "synthFapiHF001-0",
+      "testId": "synthFapiHF001",
+      "testOwner": {
+        "sub": "000000000000000000000",
+        "iss": "https://accounts.example.org"
+      },
+      "time": 1792600000000
+    },
+    {
+      "src": "RequireOnlyBCP195RecommendedCiphersForTLS12",
+      "result": "FAILURE",
+      "requirements": [
+        "FAPI2-SP-FINAL-5.2.2",
+        "FAPI-ISSUES-847"
+      ],
+      "msg": "Server accepted a cipher that is not on the list of permitted ciphers",
+      "port": 443,
+      "cipher_suite": "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA",
+      "host": "issuer.example.com",
+      "_id": "synthFapiHF001-1",
+      "testId": "synthFapiHF001",
+      "testOwner": {
+        "sub": "000000000000000000000",
+        "iss": "https://accounts.example.org"
+      },
+      "time": 1792600000001
+    },
+    {
+      "src": "CallProtectedResource",
+      "msg": "Second credential request",
+      "access_token": "eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiJ4In0.c2lnbmF0dXJl",
+      "dpop_proof": "eyJ0eXAiOiJkcG9wK2p3dCJ9.e30.sig",
+      "_id": "synthFapiHF001-2",
+      "testId": "synthFapiHF001",
+      "testOwner": {
+        "sub": "000000000000000000000",
+        "iss": "https://accounts.example.org"
+      },
+      "time": 1792600000002
+    },
+    {
+      "src": "VCICheckForDeferredCredentialResponse",
+      "result": "FAILURE",
+      "requirements": [
+        "OID4VCI-1FINAL-9"
+      ],
+      "msg": "Credential response contains neither credentials nor transaction_id",
+      "credential_response": {
+        "error": "invalid_token"
+      },
+      "_id": "synthFapiHF001-3",
+      "testId": "synthFapiHF001",
+      "testOwner": {
+        "sub": "000000000000000000000",
+        "iss": "https://accounts.example.org"
+      },
+      "time": 1792600000003
+    },
+    {
+      "src": "fapi2-security-profile-final-happy-flow",
+      "result": "INTERRUPTED",
+      "msg": "Test was interrupted before it could complete. The failure 'VCICheckForDeferredCredentialResponse' means the test cannot continue.",
+      "_id": "synthFapiHF001-4",
+      "testId": "synthFapiHF001",
+      "testOwner": {
+        "sub": "000000000000000000000",
+        "iss": "https://accounts.example.org"
+      },
+      "time": 1792600000004
+    }
+  ]
+}

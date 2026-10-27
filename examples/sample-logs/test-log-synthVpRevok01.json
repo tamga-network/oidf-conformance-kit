@@ -1,0 +1,61 @@
+{
+  "exportedAt": "2026-10-27T10:00:00Z",
+  "exportedFrom": "https://demo.certification.openid.net",
+  "exportedBy": {
+    "sub": "000000000000000000000",
+    "iss": "https://accounts.example.org"
+  },
+  "exportedVersion": "5.3.3",
+  "testInfo": {
+    "_id": "synthVpRevok01",
+    "testId": "synthVpRevok01",
+    "testName": "oid4vp-1final-verifier-present-revoked-credential",
+    "variant": {
+      "client_id_prefix": "x509_hash",
+      "credential_format": "sd_jwt_vc",
+      "request_method": "request_uri_signed",
+      "response_mode": "direct_post.jwt",
+      "vp_profile": "haip"
+    },
+    "started": "2026-10-27T10:10:00Z",
+    "config": {
+      "alias": "example-verifier",
+      "credential": {
+        "signing_jwk": {
+          "kty": "EC",
+          "d": "SYNTHETIC-PRIVATE-KEY-MUST-NOT-APPEAR"
+        }
+      }
+    },
+    "description": "synthetic example",
+    "alias": "example-verifier",
+    "owner": {
+      "sub": "000000000000000000000",
+      "iss": "https://accounts.example.org"
+    },
+    "planId": "SYNTHPLAN0001",
+    "status": "FINISHED",
+    "version": "5.3.3",
+    "summary": "synthetic",
+    "publish": null,
+    "result": "FAILED"
+  },
+  "results": [
+    {
+      "src": "EnsureVerifierFetchedRevocationList",
+      "result": "FAILURE",
+      "requirements": [
+        "SDJWTVC-3.4",
+        "OTSL-8.3"
+      ],
+      "msg": "The verifier did not fetch the status list the presented credential references, so it cannot have detected the revocation. Contact: tester@example.org",
+      "_id": "synthVpRevok01-0",
+      "testId": "synthVpRevok01",
+      "testOwner": {
+        "sub": "000000000000000000000",
+        "iss": "https://accounts.example.org"
+      },
+      "time": 1792600000000
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "exportedAt": "2026-10-27T10:00:00Z",
+  "exportedFrom": "https://demo.certification.openid.net",
+  "exportedBy": {
+    "sub": "000000000000000000000",
+    "iss": "https://accounts.example.org"
+  },
+  "exportedVersion": "5.3.3",
+  "testInfo": {
+    "_id": "synthBatch0001",
+    "testId": "synthBatch0001",
+    "testName": "oid4vci-1_0-issuer-batch-issuance",
+    "variant": {
+      "client_auth_type": "client_attestation",
+      "credential_format": "sd_jwt_vc",
+      "fapi_profile": "vci_haip",
+      "vci_authorization_code_flow_variant": "wallet_initiated",
+      "sender_constrain": "dpop",
+      "fapi_request_method": "unsigned",
+      "openid": "plain_oauth",
+      "vci_credential_encryption": "plain"
+    },
+    "started": "2026-10-27T09:20:00Z",
+    "config": {
+      "alias": "example-issuer",
+      "vci": {
+        "credential_issuer_url": "https://issuer.example.com"
+      },
+      "client_attestation": {
+        "attester_jwks": {
+          "keys": [
+            {
+              "kty": "EC",
+              "crv": "P-256",
+              "d": "SYNTHETIC-PRIVATE-KEY-MUST-NOT-APPEAR",
+              "x": "AAAA",
+              "y": "BBBB"
+            }
+          ]
+        }
+      }
+    },
+    "description": "synthetic example",
+    "alias": "example-issuer",
+    "owner": {
+      "sub": "000000000000000000000",
+      "iss": "https://accounts.example.org"
+    },
+    "planId": "SYNTHPLAN0001",
+    "status": "FINISHED",
+    "version": "5.3.3",
+    "summary": "synthetic",
+    "publish": null,
+    "result": "FAILED"
+  },
+  "results": [
+    {
+      "src": "VCIEnsureBatchBindingKeysAreDistinct",
+      "result": "SUCCESS",
+      "msg": "Binding keys are distinct",
+      "_id": "synthBatch0001-0",
+      "testId": "synthBatch0001",
+      "testOwner": {
+        "sub": "000000000000000000000",
+        "iss": "https://accounts.example.org"
+      },
+      "time": 1792600000000
+    },
+    {
+      "src": "VCIEnsureBatchTimeClaimsNotLinkable",
+      "result": "FAILURE",
+      "requirements": [
+        "SDJWT-10.1"
+      ],
+      "msg": "The batch credentials share a precise, high-entropy time claim [iat, exp] which lets verifiers correlate the credentials.",
+      "precise_time_claims": [
+        "iat",
+        "exp"
+      ],
+      "iat_distinct_values": "[1792600765]",
+      "exp_distinct_values": "[1855672765]",
+      "_id": "synthBatch0001-1",
+      "testId": "synthBatch0001",
+      "testOwner": {
+        "sub": "000000000000000000000",
+        "iss": "https://accounts.example.org"
+      },
+      "time": 1792600000001
+    }
+  ]
+}

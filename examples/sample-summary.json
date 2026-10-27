@@ -1,0 +1,312 @@
+{
+  "tool": "oidf-log-summary",
+  "version": "0.1.0",
+  "totals": {
+    "FAILED": 4,
+    "REVIEW": 1,
+    "SKIPPED": 1,
+    "PASSED": 1
+  },
+  "tests": [
+    {
+      "test": "oid4vci-1_0-issuer-metadata-test",
+      "result": "FAILED",
+      "status": "FINISHED",
+      "variant": "client_attestation sd_jwt_vc vci_haip",
+      "variant_map": {
+        "client_auth_type": "client_attestation",
+        "credential_format": "sd_jwt_vc",
+        "fapi_profile": "vci_haip"
+      },
+      "started": "2026-10-27T09:00:00Z",
+      "test_id": "synthMeta00001",
+      "suite_version": "5.3.3",
+      "counts": {
+        "SUCCESS": 1,
+        "WARNING": 1,
+        "FAILURE": 1
+      },
+      "findings": [
+        {
+          "level": "WARNING",
+          "condition": "CheckForUnexpectedParametersInCredentialIssuerMetadata",
+          "message": "Unknown properties were found in the OID4VCI Credential Issuer metadata.",
+          "details": {
+            "requirements": [
+              "OID4VCI-1FINAL-12.2.3"
+            ],
+            "unknown_properties": [
+              "$.credential_configurations_supported.example_pid.credential_metadata.display[0].lang",
+              "$.credential_configurations_supported.example_pid.display"
+            ]
+          },
+          "hint": "references/common-failures.md#cf-issuer-metadata-unknown-properties"
+        },
+        {
+          "level": "FAILURE",
+          "condition": "CheckDiscEndpointClientAttestationSigningAlgValuesSupported",
+          "message": "attest_jwt_client_auth is supported but required fields are missing",
+          "details": {
+            "requirements": [
+              "OAuth2-ATCA07-10.1"
+            ],
+            "missing_fields": [
+              "client_attestation_signing_alg_values_supported",
+              "client_attestation_pop_signing_alg_values_supported"
+            ]
+          },
+          "hint": "references/common-failures.md#cf-client-attestation-alg-metadata"
+        }
+      ],
+      "notes": [],
+      "source": "test-log-synthMeta00001.json"
+    },
+    {
+      "test": "fapi2-security-profile-final-happy-flow",
+      "result": "FAILED",
+      "status": "INTERRUPTED",
+      "variant": "client_attestation sd_jwt_vc vci_haip unsigned plain_oauth dpop wallet_initiated",
+      "variant_map": {
+        "client_auth_type": "client_attestation",
+        "credential_format": "sd_jwt_vc",
+        "fapi_profile": "vci_haip",
+        "vci_authorization_code_flow_variant": "wallet_initiated",
+        "sender_constrain": "dpop",
+        "fapi_request_method": "unsigned",
+        "openid": "plain_oauth"
+      },
+      "started": "2026-10-27T09:10:00Z",
+      "test_id": "synthFapiHF001",
+      "suite_version": "5.3.3",
+      "counts": {
+        "SUCCESS": 1,
+        "FAILURE": 2,
+        "INTERRUPTED": 1
+      },
+      "findings": [
+        {
+          "level": "FAILURE",
+          "condition": "RequireOnlyBCP195RecommendedCiphersForTLS12",
+          "message": "Server accepted a cipher that is not on the list of permitted ciphers",
+          "details": {
+            "requirements": [
+              "FAPI2-SP-FINAL-5.2.2",
+              "FAPI-ISSUES-847"
+            ],
+            "cipher_suite": "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA",
+            "port": 443
+          },
+          "hint": "references/common-failures.md#cf-tls12-ciphers"
+        },
+        {
+          "level": "FAILURE",
+          "condition": "VCICheckForDeferredCredentialResponse",
+          "message": "Credential response contains neither credentials nor transaction_id",
+          "details": {
+            "requirements": [
+              "OID4VCI-1FINAL-9"
+            ],
+            "credential_response": "keys: error; error=invalid_token"
+          },
+          "hint": "references/common-failures.md#cf-access-token-reuse"
+        }
+      ],
+      "notes": [
+        {
+          "level": "INTERRUPTED",
+          "message": "Test was interrupted before it could complete. The failure 'VCICheckForDeferredCredentialResponse' means the test cannot continue."
+        }
+      ],
+      "source": "test-log-synthFapiHF001.json"
+    },
+    {
+      "test": "oid4vci-1_0-issuer-batch-issuance",
+      "result": "FAILED",
+      "status": "FINISHED",
+      "variant": "client_attestation sd_jwt_vc vci_haip unsigned plain_oauth dpop wallet_initiated plain",
+      "variant_map": {
+        "client_auth_type": "client_attestation",
+        "credential_format": "sd_jwt_vc",
+        "fapi_profile": "vci_haip",
+        "vci_authorization_code_flow_variant": "wallet_initiated",
+        "sender_constrain": "dpop",
+        "fapi_request_method": "unsigned",
+        "openid": "plain_oauth",
+        "vci_credential_encryption": "plain"
+      },
+      "started": "2026-10-27T09:20:00Z",
+      "test_id": "synthBatch0001",
+      "suite_version": "5.3.3",
+      "counts": {
+        "SUCCESS": 1,
+        "FAILURE": 1
+      },
+      "findings": [
+        {
+          "level": "FAILURE",
+          "condition": "VCIEnsureBatchTimeClaimsNotLinkable",
+          "message": "The batch credentials share a precise, high-entropy time claim [iat, exp] which lets verifiers correlate the credentials.",
+          "details": {
+            "requirements": [
+              "SDJWT-10.1"
+            ],
+            "precise_time_claims": [
+              "iat",
+              "exp"
+            ],
+            "iat_distinct_values": "[1792600765]",
+            "exp_distinct_values": "[1855672765]"
+          },
+          "hint": "references/common-failures.md#cf-time-claims-linkable"
+        }
+      ],
+      "notes": [],
+      "source": "test-log-synthBatch0001.json"
+    },
+    {
+      "test": "oid4vci-1_0-issuer-fail-unsupported-encryption-algorithm",
+      "result": "SKIPPED",
+      "status": "FINISHED",
+      "variant": "client_attestation sd_jwt_vc vci_haip unsigned plain_oauth dpop wallet_initiated encrypted",
+      "variant_map": {
+        "client_auth_type": "client_attestation",
+        "credential_format": "sd_jwt_vc",
+        "fapi_profile": "vci_haip",
+        "vci_authorization_code_flow_variant": "wallet_initiated",
+        "sender_constrain": "dpop",
+        "fapi_request_method": "unsigned",
+        "openid": "plain_oauth",
+        "vci_credential_encryption": "encrypted"
+      },
+      "started": "2026-10-27T09:30:00Z",
+      "test_id": "synthEncSkip01",
+      "suite_version": "5.3.3",
+      "counts": {
+        "SKIPPED": 1
+      },
+      "findings": [],
+      "notes": [
+        {
+          "level": "SKIPPED",
+          "message": "The test was skipped: Credential encryption is not supported by the credential issuer - neither credential_response_encryption nor credential_request_encryption are present in the credential issuer metadata."
+        }
+      ],
+      "source": "test-log-synthEncSkip01.json"
+    },
+    {
+      "test": "oid4vp-1final-verifier-happy-flow",
+      "result": "REVIEW",
+      "status": "FINISHED",
+      "variant": "x509_hash sd_jwt_vc request_uri_signed direct_post.jwt haip",
+      "variant_map": {
+        "client_id_prefix": "x509_hash",
+        "credential_format": "sd_jwt_vc",
+        "request_method": "request_uri_signed",
+        "response_mode": "direct_post.jwt",
+        "vp_profile": "haip"
+      },
+      "started": "2026-10-27T10:00:00Z",
+      "test_id": "synthVpHappy01",
+      "suite_version": "5.3.3",
+      "counts": {
+        "WARNING": 2,
+        "REVIEW": 1
+      },
+      "findings": [
+        {
+          "level": "WARNING",
+          "condition": "CheckForUnexpectedParametersInVpAuthorizationRequest",
+          "message": "Unknown parameters were found in the authorization request.",
+          "details": {
+            "unknown_params": [
+              "purpose"
+            ]
+          },
+          "hint": "references/common-failures.md#cf-purpose-parameter"
+        },
+        {
+          "level": "WARNING",
+          "condition": "ValidateDirectPostResponse",
+          "message": "Direct post response object contains unexpected keys",
+          "details": {
+            "requirements": [
+              "OID4VP-1FINAL-8.2"
+            ],
+            "response": "keys: extra_url, redirect_uri"
+          },
+          "hint": "references/common-failures.md#cf-unknown-keys-in-responses"
+        },
+        {
+          "level": "REVIEW",
+          "condition": "ExpectVerifierSuccessfulVerificationPage",
+          "message": "Upload a screenshot showing that the verifier successfully verified the presented credential.",
+          "details": {
+            "requirements": [
+              "OID4VP-1FINAL-8.2"
+            ],
+            "img": "<screenshot uploaded>"
+          }
+        }
+      ],
+      "notes": [],
+      "source": "test-log-synthVpHappy01.json"
+    },
+    {
+      "test": "oid4vp-1final-verifier-present-revoked-credential",
+      "result": "FAILED",
+      "status": "FINISHED",
+      "variant": "x509_hash sd_jwt_vc request_uri_signed direct_post.jwt haip",
+      "variant_map": {
+        "client_id_prefix": "x509_hash",
+        "credential_format": "sd_jwt_vc",
+        "request_method": "request_uri_signed",
+        "response_mode": "direct_post.jwt",
+        "vp_profile": "haip"
+      },
+      "started": "2026-10-27T10:10:00Z",
+      "test_id": "synthVpRevok01",
+      "suite_version": "5.3.3",
+      "counts": {
+        "FAILURE": 1
+      },
+      "findings": [
+        {
+          "level": "FAILURE",
+          "condition": "EnsureVerifierFetchedRevocationList",
+          "message": "The verifier did not fetch the status list the presented credential references, so it cannot have detected the revocation. Contact: <email>",
+          "details": {
+            "requirements": [
+              "SDJWTVC-3.4",
+              "OTSL-8.3"
+            ]
+          },
+          "hint": "references/common-failures.md#cf-status-list-fetch"
+        }
+      ],
+      "notes": [],
+      "source": "test-log-synthVpRevok01.json"
+    },
+    {
+      "test": "oid4vp-1final-verifier-invalid-kb-jwt-nonce",
+      "result": "PASSED",
+      "status": "FINISHED",
+      "variant": "x509_hash sd_jwt_vc request_uri_signed direct_post.jwt haip",
+      "variant_map": {
+        "client_id_prefix": "x509_hash",
+        "credential_format": "sd_jwt_vc",
+        "request_method": "request_uri_signed",
+        "response_mode": "direct_post.jwt",
+        "vp_profile": "haip"
+      },
+      "started": "2026-10-27T10:20:00Z",
+      "test_id": "synthVpNeg0001",
+      "suite_version": "5.3.3",
+      "counts": {
+        "SUCCESS": 1
+      },
+      "findings": [],
+      "notes": [],
+      "source": "test-log-synthVpNeg0001.json"
+    }
+  ]
+}

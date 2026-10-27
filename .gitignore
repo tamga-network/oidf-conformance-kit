@@ -1,0 +1,12 @@
+# Real conformance logs and filled-in configs contain private keys and account data — never commit them.
+logs/
+*.zip
+suite-config*.json
+!skills/oidf-conformance/references/config-templates/*.json
+*.key
+*.pem
+selftest-pki/
+
+__pycache__/
+*.pyc
+.DS_Store
