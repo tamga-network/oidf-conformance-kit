@@ -5,6 +5,13 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- Reference `eudi-dev.md`: complementing the suite with the open-source eudi-dev test wallet — the EU ARF checks the suite
+  does not do (access and registration certificates, over-asking by format, trusted lists and their JAdES signature),
+  running it against a test deployment, an end-to-end presentation with the suite's mock PID issuer, a CI recipe and a
+  table of typical findings with their classification. Linked from the README, the FAQ and the skill's workflow step 9.
+
 ## [0.1.0] - 2026-10-27
 
 First public release.

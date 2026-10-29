@@ -88,6 +88,7 @@ Update later with `/plugin marketplace update oidf-conformance-kit`. For local d
 | Common failures | [references/common-failures.md](skills/oidf-conformance/references/common-failures.md) | Symptom → condition class → cause → fix table (metadata shapes, locales, schema cascade, DPoP at PAR, TLS ciphers, refresh binding, status lists, ephemeral keys, …) |
 | Config templates | [references/config-templates/](skills/oidf-conformance/references/config-templates/README.md) | Redacted suite JSON for the issuer and verifier plans, field by field |
 | Test PKI | [references/pki.md](skills/oidf-conformance/references/pki.md) | openssl recipe for a test root, attester and mock-PID keys, and PEM → JWK with `x5c` |
+| eudi-dev reference | [references/eudi-dev.md](skills/oidf-conformance/references/eudi-dev.md) | Complementing the suite with the open-source eudi-dev test wallet: EU ARF checks the suite does not do (access and registration certificates, over-asking, trusted lists), end-to-end and CI recipes, typical findings |
 | Log summarizer | [scripts/oidf-log-summary.py](scripts/oidf-log-summary.py) | Per-module results and every FAILURE/WARNING/REVIEW with condition class and key details; text, Markdown or JSON; strips account data and secrets; `--fail-on` for CI |
 | Examples | [examples/](examples/) | Synthetic logs and the summarizer's output for them |
 
@@ -153,6 +154,11 @@ Don't change correct code. Confirm with the references, classify it as a *suite 
 and report it upstream. Example: the cascading `unevaluatedProperties` warning in
 [common-failures.md](skills/oidf-conformance/references/common-failures.md#cf-schema-cascade).
 
+**The suite passes. Is my issuer or verifier ready for EU wallets?**
+Not necessarily. The suite tests the protocols; EU wallets also check access and registration certificates, over-asking
+and trusted lists. Run an ARF-aware counterpart next to it — see [eudi-dev.md](skills/oidf-conformance/references/eudi-dev.md)
+for how to use the open-source eudi-dev test wallet for that, also in CI.
+
 **Does it work with other AI tools or without Claude?**
 The references are plain Markdown and the summarizer is a standalone Python script (standard library only), so both are
 usable on their own. The skills and agent are written for Claude Code.
@@ -200,6 +206,8 @@ OpenID4VP doğrulayıcı (verifier) servislerini HAIP ve FAPI 2.0 planlarıyla s
 - **İçinde:** adım adım iş akışı, her test modülünün ne denetlediği ve nasıl düzeltileceği, ilk koşudan önce kod kontrol
   listesi, test loglarını gizli bilgi sızdırmadan özetleyen bir betik ve bulguları sınıflandırıp standarda dayalı düzeltme
   öneren bir ajan.
+- **Tamamlayıcı:** OIDF aracı AB'ye özgü ARF kurallarını (erişim ve kayıt sertifikası, fazla istek, güven listeleri)
+  denetlemez; açık kaynak eudi-dev test cüzdanıyla nasıl tamamlanacağı `references/eudi-dev.md`'de.
 - **Temel kural:** düzeltmeyi standart için yap, test aracının kendine özgü beklentisi için değil; bilinçli her farkı yaz.
 - **Dikkat:** öz-test sertifika değildir. Bir planı yayımlamak, plan ayarındaki özel anahtarları da herkese açar —
   yayımlamadan önce test anahtarlarını değiştirin.

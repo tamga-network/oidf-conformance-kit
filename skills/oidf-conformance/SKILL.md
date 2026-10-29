@@ -17,6 +17,8 @@ References (load the one you need, they are long):
 - [references/common-failures.md](references/common-failures.md) — symptom → condition class → cause → fix
 - [references/config-templates/](references/config-templates/README.md) — redacted suite configuration templates
 - [references/pki.md](references/pki.md) — test root, attester and mock-issuer keys with openssl
+- [references/eudi-dev.md](references/eudi-dev.md) — complementing the suite with eudi-dev: EU ARF checks (access and
+  registration certificates, over-asking, trusted lists), end-to-end and CI
 - Log summarizer: `python "${CLAUDE_PLUGIN_ROOT}/scripts/oidf-log-summary.py" <logs>`
 - Before the first run: the `oidf-preflight` skill. For log triage and fixes: the `oidf-fixer` agent.
 
@@ -135,7 +137,9 @@ verifier break on our current behaviour?* If yes, it is not a suite quirk.
 
 Fix in small commits with spec citations, add unit/integration tests that reproduce the suite's request, deploy to the
 test environment, and re-run **only** the affected modules ("Repeat Test"), plus the happy flow. Iterate until no
-FAILED remains and every WARNING/REVIEW has a written reason.
+FAILED remains and every WARNING/REVIEW has a written reason. Then run an ARF-aware counterpart (eudi-dev, debug and
+strict mode — [eudi-dev.md](references/eudi-dev.md)): the suite does not check registration certificates, over-asking or
+trusted lists, which EU wallets enforce.
 
 ### 10. Publish
 
